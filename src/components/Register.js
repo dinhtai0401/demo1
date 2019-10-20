@@ -5,17 +5,20 @@ export default function Register(props)
     return(
     <div>
 
+      <form onSubmit={ props.handleSubmit }>
         <div>
           Username <input type="text" name="username" />
-        </div>
-        <div>
+      </div>
+      <div>
           Password <input type="text" name="password" />
         </div>
-        <div>
-        <Link to={`/`}><button type='submit' onClick={props.handleSubmit}>Register</button></Link>
-        </div>
+      <div>
+          <button type="submit">Register</button>
+      </div>
+      </form>
 
-      <button onClick={() => props.history.goBack()}>Back</button>
+
+<button onClick={() => props.history.goBack()}>Back</button>
     </div>
   )
 }

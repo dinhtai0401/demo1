@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import LoginView from './components/LoginView';
 import ExampleProtectedView from './components/ExampleProtectedView';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -130,10 +130,10 @@ export default class App extends Component {
       <Router>
             <div>
           <Route path="/pay" exact render={ routeProps => <Pay AddToCart={this.state.AddToCart} getAdd={this.getAdd} Finish={this.Finish} {...routeProps} hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds}/>} />
-          <Route path="/item" exact render={(routeProps) => <ItemList item={this.state.item}  {...routeProps}/>}/>
+          <Route path="/" exact render={(routeProps) => <ItemList item={this.state.item} {...routeProps}/>}/>
           <Route path="/product/:id" exact render={ routeProps => <Clock {...routeProps} hours={this.state.hours} Add={this.Add} minutes={this.state.minutes} seconds={this.state.seconds} handleStart={this.handleStart} handleReset={this.handleReset} handleStop={this.handleStop} getProductInfo={ this.getProductInfo } /> } />
-          <Route path="/" exact render={ routeProps => <Register handleSubmit={this.handleSubmit}/>}/>
-        <Route path="/" exact render={
+          <Route path="/register" exact render={ routeProps => <Register handleSubmit={this.handleSubmit} {...routeProps} />}/>
+        <Route path="/login" exact render={
           (routeProps) =>
             <LoginView
               loginSuccess = { this.onLogin }
@@ -151,6 +151,7 @@ export default class App extends Component {
                 />
           }>
         </ProtectedRoute>
+
         </div>
       </Router>
     )
