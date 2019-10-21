@@ -11,19 +11,19 @@ const Sidebar = ({open,...props}) => {
           <a href="/" tabIndex={tabIndex}>
             <span aria-hidden="true">&#x1f4cc;</span>Map
           </a>
-          <Link to="/login" tabIndex={tabIndex}><button>Login</button></Link>
-          <Link to="/register" tabIndex={tabIndex}><button>Register</button></Link>
+          <Link to="/login" tabIndex={tabIndex}><span aria-hidden="true">Login</span></Link>
+          <Link to="/register" tabIndex={tabIndex}><span aria-hidden="true">Register</span></Link>
           <a href="/" tabIndex={tabIndex}>
-            <span aria-hidden="true">💸</span>Pricing
+            <span aria-hidden="true">&#x1f4b0;</span>Pricing
           </a>
           <a href="/" tabIndex={tabIndex}>
-            <span aria-hidden="true">📩</span>Contact
+            <span aria-hidden="true">&#x260E;</span>Contact
           </a>
           <a href="/" tabIndex={tabIndex}>
-            <span aria-hidden="true">📩</span>Setting
+            <span aria-hidden="true">&#x2699;</span>Setting
           </a>
           <a href="/" tabIndex={tabIndex}>
-            <span aria-hidden="true">📩</span>About us
+            <span aria-hidden="true">&#x1f6c8;</span>About us
           </a>
         </StyledSidebar>
     )

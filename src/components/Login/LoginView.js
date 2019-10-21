@@ -1,6 +1,8 @@
 import React from 'react';
 import Auth from './Auth';
+import './Login.css';
 
+import { Button , Form , FormGroup , Label , Input} from 'reactstrap';
 export default function LoginView(props) {
 
   function login(event)
@@ -19,7 +21,23 @@ export default function LoginView(props) {
   }
 
   return (
-    <div>
+    <Form className="Login" onSubmit={login}>
+      <h1>
+        <span className="font-weight-bold">Login</span>
+      </h1>
+      <h2 className="text-center">Welcome</h2>
+      <FormGroup>
+        <Label>Username</Label>
+        <Input type="text" placeholder="Username" name="username"/>
+      </FormGroup>
+      <FormGroup>
+        <Label>Password</Label>
+        <Input type="text" name="password" placeholder="Password"/>
+      </FormGroup>
+      <Button className="btn-lg btn-dark btn-block">Sign in</Button>
+      <Button onClick={() => props.history.goBack()}>Back</Button>
+    </Form>
+    /*<div>
       <h1>Login</h1>
       <div>
        Please give your username and password to login
@@ -35,10 +53,10 @@ export default function LoginView(props) {
         <div>
           <button type="submit">Login</button>
         </div>
-      </form>
-    <button onClick={() => props.history.goBack()}>Back</button>
+      </form>*/
+    
 
 
-    </div>
+    /*</div>*/
   )
 }

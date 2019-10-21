@@ -1,9 +1,25 @@
 import React from 'react';
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+import { Button , Form , FormGroup , Label , Input} from 'reactstrap';
 export default function Register(props)
 {
     return(
-    <div>
+      <Form className="Login" onSubmit={props.handleSubmit}>
+      <h1>
+        <span className="font-weight-bold">Register</span>
+      </h1>
+      <FormGroup>
+        <Label>Username</Label>
+        <Input type="text" placeholder="Username" name="username"/>
+      </FormGroup>
+      <FormGroup>
+        <Label>Password</Label>
+        <Input type="text" name="password" placeholder="Password"/>
+      </FormGroup>
+      <Button className="btn-lg btn-dark btn-block">Sign up</Button>
+      <Button onClick={() => props.history.goBack()}>Back</Button>
+    </Form>
+    /*<div>
 
       <form onSubmit={ props.handleSubmit }>
         <div>
@@ -19,6 +35,6 @@ export default function Register(props)
 
 
 <button onClick={() => props.history.goBack()}>Back</button>
-    </div>
+    </div>*/
   )
 }

@@ -6,7 +6,7 @@ export const StyledSidebar = styled.nav`
   justify-content: center;
   background: ${({ theme }) => theme.primaryLight};
   transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
-  height: 80vh;
+  height: 100vh;
   text-align: left;
   padding: 2rem;
   position: absolute;
