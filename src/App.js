@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoginView from './components/Login/LoginView';
 import ExampleProtectedView from './components/Login/ExampleProtectedView';
 import ProtectedRoute from './components/Login/ProtectedRoute';
@@ -27,7 +27,7 @@ export default class App extends Component {
       minutes: 0,
       seconds: 0,
       item: [
-        {id: 1, img: "Slow.png",name: "Slow", price: "Free", priceValue: ""},
+        {id: 1, img: "Slow.png",name: "Slow", price: 0, priceValue: ""},
         {id: 2, img: "Slow.png",name: "Slow", price: 0.20, priceValue: "e/min"},
         {id: 3, img: "Fast.png",name: "Fast", price: 18, priceValue: "c/kWh"}
       ],
@@ -37,6 +37,16 @@ export default class App extends Component {
       password: '',
       verify: "4444",
     };
+  }
+
+  componentDidMount = () =>
+  {
+    axios.get(constants.baseAddress + '/charge').then(result => {
+      this.setState({ item: result.data.pluggers });
+    })
+    .catch(error => {
+      console.error(error);
+    })
   }
 
   onLogin = () => {

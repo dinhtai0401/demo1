@@ -1,7 +1,8 @@
 import React from 'react';
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react';
 import {StyledSearchBar} from './Sidebar/SearchBar.styled';
-
+import axios from 'axios';
+import constants from '../constants.json';
 class GoogleMapsContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -20,6 +21,17 @@ class GoogleMapsContainer extends React.Component {
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClick = this.onMapClick.bind(this);
   }
+
+  componentDidMount = () =>
+   {
+     axios.get(constants.baseAddress + '/pluggers').then(result => {
+       this.setState({ plug: result.data.pluggers });
+     })
+     .catch(error => {
+       console.error(error);
+     })
+   }
+
   onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
