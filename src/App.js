@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import LoginView from './components/LoginView';
-import ExampleProtectedView from './components/ExampleProtectedView';
-import ProtectedRoute from './components/ProtectedRoute';
-import Auth from './components/Auth';
+import LoginView from './components/Login/LoginView';
+import ExampleProtectedView from './components/Login/ExampleProtectedView';
+import ProtectedRoute from './components/Login/ProtectedRoute';
+import Auth from './components/Login/Auth';
 import axios from 'axios';
 import constants from './constants.json';
-import Clock from './components/Clock';
-import ItemList from './components/ItemList';
-import Pay from './components/Pay';
-import Register from './components/Register';
-
+import Clock from './components/Clock/Clock';
+import ItemList from './components/ListItem/ItemList';
+import Pay from './components/Bill/Pay';
+import Register from './components/Login/Register';
+import OutPage from './OutPage';
 import './App.css';
 export default class App extends Component {
   constructor(props)
@@ -129,8 +129,9 @@ export default class App extends Component {
     return (
       <Router>
             <div>
+          <Route path="/" exact render={ routeProps => <OutPage {...routeProps}/>}  />
           <Route path="/pay" exact render={ routeProps => <Pay AddToCart={this.state.AddToCart} getAdd={this.getAdd} Finish={this.Finish} {...routeProps} hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds}/>} />
-          <Route path="/" exact render={(routeProps) => <ItemList item={this.state.item} {...routeProps}/>}/>
+          <Route path="/item" exact render={(routeProps) => <ItemList item={this.state.item} {...routeProps}/>}/>
           <Route path="/product/:id" exact render={ routeProps => <Clock {...routeProps} hours={this.state.hours} Add={this.Add} minutes={this.state.minutes} seconds={this.state.seconds} handleStart={this.handleStart} handleReset={this.handleReset} handleStop={this.handleStop} getProductInfo={ this.getProductInfo } /> } />
           <Route path="/register" exact render={ routeProps => <Register handleSubmit={this.handleSubmit} {...routeProps} />}/>
         <Route path="/login" exact render={

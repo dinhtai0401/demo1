@@ -1,5 +1,5 @@
 import axios from 'axios';
-import constants from '../constants.json';
+import constants from '../../constants.json';
 
 let userInfo = {
   username: null,
@@ -7,9 +7,9 @@ let userInfo = {
 }
 
 let myAuth = {
-    authenticate: (username, password) => {      
+    authenticate: (username, password) => {
       return new Promise((resolve, reject) => {
-        axios.get(constants.baseAddress + '/users/:id', 
+        axios.get(constants.baseAddress + '/users/:id',
           {
               auth: {
               username: username,
@@ -23,7 +23,7 @@ let myAuth = {
             }
             resolve();
           })
-          .catch(error => 
+          .catch(error =>
             {
               console.log(error);
               reject();
@@ -35,7 +35,7 @@ let myAuth = {
       return {
         auth: userInfo
       }
-    } 
+    }
 }
 
 export default myAuth;

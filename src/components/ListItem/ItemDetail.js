@@ -1,12 +1,12 @@
 import React from 'react';
-import '.././App.css';
+import '../../App.css';
 import { Link } from "react-router-dom";
 
 
 
 const ItemDetail = props => {
   return <div>
-    
+
     <div className="column">
       <div className="center">
         <Link to={ `/product/${props.id}` }>
