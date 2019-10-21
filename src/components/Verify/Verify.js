@@ -1,22 +1,17 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import { Button , Form , FormGroup , Label , Input} from 'reactstrap';
-export default function Register(props)
+export default function Verify(props)
 {
     return(
-      <Form className="Login" onSubmit={props.handleSubmit}>
+    <Form className="Login" >
       <h1>
-        <span className="font-weight-bold">Register</span>
+        <span className="font-weight-bold">CODE</span>
       </h1>
-      <FormGroup>
-        <Label>Username</Label>
-        <Input type="text" placeholder="Username" name="username"/>
-      </FormGroup>
-      <FormGroup>
-        <Label>Password</Label>
-        <Input type="text" name="password" placeholder="Password"/>
-      </FormGroup>
-      <Link to="/login"><Button className="btn-lg btn-dark btn-block">Sign up</Button></Link>
+
+
+      <Input type="text" name="password" onChange={props.handlePasswordChange}/>
+      <Button className="btn-lg btn-dark btn-block">Enter</Button>
       <Button onClick={() => props.history.goBack()}>Back</Button>
     </Form>
     /*<div>

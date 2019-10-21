@@ -9,13 +9,13 @@ class GoogleMapsContainer extends React.Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      location:[{ id:1 , lat: 15.333959 , lng: 43.987661 , type:"Fast" , address:"Sana'a Governorate" , img:'./Picture/Location1.PNG'},
-                { id:2 , lat: 16.611876 , lng: 45.886108 , type:"Slow" , address:"Al Jawf Governorate", img:'./Picture/location2.PNG'},
-                { id:3 , lat: 15.486143 , lng: 47.889913 , type:"Free" , address:"Hadhramaut Governorate" , img:'./Picture/location3.PNG'},
-                { id:4 , lat: 14.846135 , lng: 45.912894 , type:"Fast" , address:"Shabwah Governorate" , img:'./Picture/location4.PNG'},
-                { id:5 , lat: 16.576395 , lng: 50.367170 , type:"Slow" , address:"Al Mahrah Governorate" , img:'./Picture/location5.PNG'}
+      location:[{ id:1 , lat: 15.333959 , lng: 43.987661 , type:"Fast Free Slow" , address:"Sana'a Governorate" , img:"location1.png"},
+                { id:2 , lat: 16.611876 , lng: 45.886108 , type:"Slow, Fast" , address:"Al Jawf Governorate", img:"location2.png"},
+                { id:3 , lat: 15.486143 , lng: 47.889913 , type:"Free" , address:"Hadhramaut Governorate" , img:"location3.png"},
+                { id:4 , lat: 14.846135 , lng: 45.912894 , type:"Fast, Slow" , address:"Shabwah Governorate" , img:"location4.PNG"},
+                { id:5 , lat: 16.576395 , lng: 50.367170 , type:"Slow, Free" , address:"Al Mahrah Governorate" , img:"Picture/location5.PNG"}
       ],
-      search:""
+      search:"",
     }
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClick = this.onMapClick.bind(this);
@@ -67,23 +67,23 @@ class GoogleMapsContainer extends React.Component {
         zoom = { 14 }
         initialCenter = {{ lat: 15.5527, lng: 48.5164 }}
         disableDefaultUI = {true}
-       
+
       >
-        
+
       {filteredContacts.map( location=>{
          return <Marker key={location.id}  position={{
            lat:location.lat,
            lng:location.lng
-         }} type={location.type} address={location.address}
+         }} type={location.type} address={location.address} img={location.img}
          onClick={this.onMarkerClick}/>
        })}
-         
+
         <InfoWindow
           marker = { this.state.activeMarker }
           visible = { this.state.showingInfoWindow }
         >
           <div>
-            <img src={this.state.selectedPlace.img} alt=""/>
+            <img src={`/Picture/${this.state.selectedPlace.img}`} alt="" />
             <h2>{this.state.selectedPlace.address}</h2>
             <h3>{this.state.selectedPlace.type}</h3>
           </div>

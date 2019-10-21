@@ -19,7 +19,6 @@ export default function Pay(props) {
             <div className="timer-controls">
               <button className="btn btn-success" onClick={props.handleStart}>Start Time</button>
               <button className="btn btn-alert" onClick={props.handleStop}>Stop Time</button>
-              <button className="btn btn-info" onClick={props.handleReset}>Reset Time</button>
               <Link to='/pay' onClick={() => props.Add(productData.id, productData.price)}>Pay</Link>
             </div>
         </div>

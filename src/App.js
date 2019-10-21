@@ -12,6 +12,8 @@ import Pay from './components/Bill/Pay';
 import Register from './components/Login/Register';
 import OutPage from './OutPage';
 import './App.css';
+import Verify from './components/Verify/Verify';
+import Code from './components/Verify/Code'
 export default class App extends Component {
   constructor(props)
   {
@@ -31,7 +33,9 @@ export default class App extends Component {
       ],
       AddToCart:[],
       username: "",
-      password: ""
+      password: "",
+      password: '',
+      verify: "4444",
     };
   }
 
@@ -124,11 +128,28 @@ export default class App extends Component {
   });
   }
 
-  render() {
 
+
+  handlePasswordChange = event => {
+  this.setState({
+    password: event.target.value,
+  });
+  };
+
+  render() {
+    const { password, verify } = this.state;
+    if (password !== verify) {
+        console.log("Passwords don't match");
+    } else {
+        return (
+          <Clock />
+        )
+    }
     return (
       <Router>
             <div>
+          <Route path="/code" exact render={ routeProps => <Code {...routeProps}  />}  />
+          <Route path="/veryfi" exact render={ routeProps => <Verify {...routeProps}  handlePasswordChange={this.handlePasswordChange}/>}  />
           <Route path="/" exact render={ routeProps => <OutPage {...routeProps}/>}  />
           <Route path="/pay" exact render={ routeProps => <Pay AddToCart={this.state.AddToCart} getAdd={this.getAdd} Finish={this.Finish} {...routeProps} hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds}/>} />
           <Route path="/item" exact render={(routeProps) => <ItemList item={this.state.item} {...routeProps}/>}/>
@@ -140,7 +161,7 @@ export default class App extends Component {
               loginSuccess = { this.onLogin }
               loginFail = { this.onLoginFail }
               userInfo={ this.state.userInfo }
-              redirectPathOnSuccess="/item"
+              redirectPathOnSuccess="/code"
               {...routeProps}
               />
         } />
