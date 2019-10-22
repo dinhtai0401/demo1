@@ -1,35 +1,20 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import { Button , Form , FormGroup , Label , Input} from 'reactstrap';
 export default function Verify(props)
 {
-    return(
-    <Form className="Login" >
-      <h1>
-        <span className="font-weight-bold">CODE</span>
-      </h1>
-
-
-      <Input type="text" name="password" onChange={props.handlePasswordChange}/>
-      <Button className="btn-lg btn-dark btn-block">Enter</Button>
-      <Button onClick={() => props.history.goBack()}>Back</Button>
-    </Form>
-    /*<div>
-
-      <form onSubmit={ props.handleSubmit }>
-        <div>
-          Username <input type="text" name="username" />
-      </div>
-      <div>
-          Password <input type="text" name="password" />
-        </div>
-      <div>
-          <button type="submit">Register</button>
-      </div>
-      </form>
-
-
-<button onClick={() => props.history.goBack()}>Back</button>
-    </div>*/
+  return(
+    <div>
+    <button onClick={() => props.history.goBack()}>Back</button>
+    <div>
+    <form onSubmit={ props.verify }>
+    <div>Enter your code</div>
+    <input type="text" name="digit" maxlength="4"/>
+    <button type="submit">Enter</button>
+    </form>
+    <Link to='/item'><button>Start charging</button></Link>
+    </div>
+    </div>
   )
+
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import LoginView from './components/Login/LoginView';
 import ExampleProtectedView from './components/Login/ExampleProtectedView';
 import ProtectedRoute from './components/Login/ProtectedRoute';
@@ -13,7 +13,8 @@ import Register from './components/Login/Register';
 import OutPage from './OutPage';
 import './App.css';
 import Verify from './components/Verify/Verify';
-import Code from './components/Verify/Code'
+import Code from './components/Verify/Code';
+
 export default class App extends Component {
   constructor(props)
   {
@@ -26,28 +27,24 @@ export default class App extends Component {
       hours: 0,
       minutes: 0,
       seconds: 0,
-      item: [
-        {id: 1, img: "Slow.png",name: "Slow", price: 0, priceValue: ""},
-        {id: 2, img: "Slow.png",name: "Slow", price: 0.20, priceValue: "e/min"},
-        {id: 3, img: "Fast.png",name: "Fast", price: 18, priceValue: "c/kWh"}
-      ],
+      item: [],
       AddToCart:[],
       username: "",
       password: "",
-      password: '',
-      verify: "4444",
+      verify: [{id: 1, digit: '4444'}],
+      numberVerify: null,
     };
   }
 
   componentDidMount = () =>
-  {
-    axios.get(constants.baseAddress + '/charge').then(result => {
-      this.setState({ item: result.data.pluggers });
-    })
-    .catch(error => {
-      console.error(error);
-    })
-  }
+   {
+     axios.get(constants.baseAddress + '/dogs').then(result => {
+       this.setState({ item: result.data.dogs });
+     })
+     .catch(error => {
+       console.error(error);
+     })
+   }
 
   onLogin = () => {
     this.setState({ isAuthenticated: true })
@@ -139,30 +136,36 @@ export default class App extends Component {
   }
 
 
+  verify = (event) =>
+{
+  event.preventDefault();
+  console.log(event.target['digit'].value);
+  let b = this.state.verify.filter(i=>i.digit === event.target['digit'].value);
+  console.log(b);
+  if(b.length != 0)
+  {
+    this.setState({numberVerify : b[0] });
+    console.log('success');
+  }
+  else
+  {
+     this.setState({numberVerify : null});
+     console.log('empty')
+  }
+}
 
-  handlePasswordChange = event => {
-  this.setState({
-    password: event.target.value,
-  });
-  };
+
 
   render() {
-    const { password, verify } = this.state;
-    if (password !== verify) {
-        console.log("Passwords don't match");
-    } else {
-        return (
-          <Clock />
-        )
-    }
     return (
+
       <Router>
             <div>
           <Route path="/code" exact render={ routeProps => <Code {...routeProps}  />}  />
-          <Route path="/veryfi" exact render={ routeProps => <Verify {...routeProps}  handlePasswordChange={this.handlePasswordChange}/>}  />
+          <Route path="/v" exact render={ routeProps => <Verify {...routeProps}  verify={this.verify} isAuthenticated={this.state.isAuthenticated}  {...routeProps}/> }  />
           <Route path="/" exact render={ routeProps => <OutPage {...routeProps}/>}  />
-          <Route path="/pay" exact render={ routeProps => <Pay AddToCart={this.state.AddToCart} getAdd={this.getAdd} Finish={this.Finish} {...routeProps} hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds}/>} />
-          <Route path="/item" exact render={(routeProps) => <ItemList item={this.state.item} {...routeProps}/>}/>
+          <Route path="/pay" exact render={ routeProps => <Pay AddToCart={this.state.AddToCart} getAdd={this.getAdd} Finish={this.Finish} {...routeProps} hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds} />} />
+          <Route path="/item" exact render={(routeProps) => <ItemList item={this.state.item} {...routeProps} numberVerify={this.state.numberVerify}/>}/>
           <Route path="/product/:id" exact render={ routeProps => <Clock {...routeProps} hours={this.state.hours} Add={this.Add} minutes={this.state.minutes} seconds={this.state.seconds} handleStart={this.handleStart} handleReset={this.handleReset} handleStop={this.handleStop} getProductInfo={ this.getProductInfo } /> } />
           <Route path="/register" exact render={ routeProps => <Register handleSubmit={this.handleSubmit} {...routeProps} />}/>
         <Route path="/login" exact render={

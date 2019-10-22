@@ -32,7 +32,7 @@ export default function LoginView(props) {
       </FormGroup>
       <FormGroup>
         <Label>Password</Label>
-        <Input type="text" name="password" placeholder="Password"/>
+        <Input type="password" name="password" placeholder="Password"/>
       </FormGroup>
       <Button className="btn-lg btn-dark btn-block">Sign in</Button>
       <Button onClick={() => props.history.goBack()}>Back</Button>

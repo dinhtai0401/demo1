@@ -14,9 +14,9 @@ export default function Register(props)
       </FormGroup>
       <FormGroup>
         <Label>Password</Label>
-        <Input type="text" name="password" placeholder="Password"/>
+        <Input type="password" name="password" placeholder="Password"/>
       </FormGroup>
-      <Link to="/login"><Button className="btn-lg btn-dark btn-block">Sign up</Button></Link>
+      <Button className="btn-lg btn-dark btn-block">Sign up</Button>
       <Button onClick={() => props.history.goBack()}>Back</Button>
     </Form>
     /*<div>
